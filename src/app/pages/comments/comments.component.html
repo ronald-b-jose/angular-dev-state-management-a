@@ -1,0 +1,28 @@
+<p>comments works!</p>
+<button (click)="load()">Load Comments</button>
+<p *ngIf="comments$ | async; let comments">{{ comments.length }}</p> 
+
+
+<button (click)="loadFirstComment()" [disabled]="!(hasComments$ | async)" >Get First Comment from Store, and use that record to get parameters for api</button>
+<p *ngIf="sampleComments$ | async; let comments" >Sample Comments : {{ comments.length }}</p>
+
+
+<button (click)="updateComment()" [disabled]="!(hasComments$ | async)" >Update</button>
+<input type="text" [disabled]="!(hasComments$ | async)" placeholder="input text body" [(ngModel)]="body">
+<p>First Record from store</p>
+<table>
+    <tr>
+      <th>id</th>
+      <th>post id</th>
+      <th>name</th>
+      <th>email</th>
+      <th>body</th>
+    </tr>
+    <tr *ngIf="comment$ | async; let comment">
+      <td>{{comment.id}}</td>
+      <td>{{comment.postId}}</td>
+      <td>{{comment.name}}</td>
+      <td>{{comment.email}}</td>
+      <td>{{comment.body}}</td>
+    </tr>  
+  </table>
